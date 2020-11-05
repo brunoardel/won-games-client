@@ -7,7 +7,7 @@ export type HeadingProps = {
   color?: 'white' | 'black'
   lineLeft?: boolean
   lineBottom?: boolean
-  lineColor?: type
+  lineColor?: LineColors
   size?: 'small' | 'medium'
 }
 
