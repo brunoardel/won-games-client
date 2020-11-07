@@ -19,9 +19,9 @@ exports[`<Banner /> should render correctly 1`] = `
   padding: 0.8rem;
   -webkit-text-decoration: none;
   text-decoration: none;
-  height: 4rem;
-  font-size: 1.4rem;
-  padding: 0.8rem 3.2rem;
+  height: 5rem;
+  font-size: 1.6rem;
+  padding: 0.8rem 4.8rem;
 }
 
 .c5:hover {
@@ -58,9 +58,21 @@ exports[`<Banner /> should render correctly 1`] = `
   font-size: 1.4rem;
   font-weight: 400;
   margin-bottom: 1.6rem;
+}
+
+.c4 strong {
   color: #F231A5;
   font-weight: 600;
-  font-size: 1.8rem;
+}
+
+@media (max-width:1170px) {
+  .c0 .sc-bdfBwQ {
+    right: 0;
+  }
+
+  .c0 .sc-bdfBwQ::before {
+    display: none;
+  }
 }
 
 @media (min-width:768px) {
@@ -88,6 +100,12 @@ exports[`<Banner /> should render correctly 1`] = `
 @media (min-width:768px) {
   .c3 {
     font-size: 2.8rem;
+  }
+}
+
+@media (min-width:768px) {
+  .c4 {
+    font-size: 1.8rem;
   }
 }
 
