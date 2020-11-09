@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
 import theme from 'styles/theme'
 import { renderWithTheme } from 'utils/tests/helpers'
 
@@ -13,7 +13,7 @@ const props = {
 
 describe('<GameCard />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<GameCard {...props} />)
+    const { container } = renderWithTheme(<GameCard {...props} />)
 
     expect(
       screen.getByRole('heading', { name: props.title })
@@ -29,6 +29,8 @@ describe('<GameCard />', () => {
     )
 
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument()
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render price in label', () => {
@@ -52,5 +54,36 @@ describe('<GameCard />', () => {
     expect(screen.getByText('R$ 15,00')).not.toHaveStyle({
       textDecoration: 'line-through'
     })
+  })
+
+  it('should render a filled Favorite icon when favorite is true', () => {
+    renderWithTheme(<GameCard {...props} favorite />)
+
+    expect(screen.getByLabelText(/remove from wishlist/i)).toBeInTheDocument()
+  })
+
+  it('should call on Fav method when favorite is clicked', () => {
+    const onFav = jest.fn()
+    renderWithTheme(<GameCard {...props} favorite onFav={onFav} />)
+
+    fireEvent.click(screen.getAllByRole('button')[0])
+
+    expect(onFav).toBeCalled()
+  })
+
+  it('should render Ribbon', () => {
+    renderWithTheme(
+      <GameCard
+        {...props}
+        ribbon="My Ribbon"
+        ribbonColor="secondary"
+        ribbonSize="small"
+      />
+    )
+    const ribbon = screen.getByText(/my ribbon/i)
+
+    expect(ribbon).toHaveStyle({ backgroundColor: '#3CD3C1' })
+    expect(ribbon).toHaveStyle({ height: '2.6rem', fontSize: '1.2rem' })
+    expect(ribbon).toBeInTheDocument()
   })
 })
